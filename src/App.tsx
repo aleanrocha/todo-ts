@@ -1,7 +1,10 @@
+import { Header } from './components/Header'
+
 export const App = () => {
   return (
     <>
-      <h1>Hello Todo-TS</h1>
+      <Header />
+      <main>Hello</main>
     </>
   )
 }
