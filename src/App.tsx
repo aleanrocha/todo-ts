@@ -1,6 +1,7 @@
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { TaskForm } from './components/TaskForm'
+import { ITask } from './interfaces/Task'
 
 export const App = () => {
   return (
