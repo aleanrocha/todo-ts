@@ -1,9 +1,13 @@
+import { useState } from 'react'
+
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { TaskForm } from './components/TaskForm'
 import { ITask } from './interfaces/Task'
 
 export const App = () => {
+  const [taskList, setTaskList] = useState<ITask[]>([])
+  console.log(taskList)
   return (
     <>
       <Header />
@@ -13,7 +17,11 @@ export const App = () => {
             <h2 className="text-center text-2xl font-bold py-4">
               O que vocẽ vai fazer hoje?
             </h2>
-            <TaskForm btnText="Criar" />
+            <TaskForm
+              btnText="Criar"
+              taskList={taskList}
+              setTaskList={setTaskList}
+            />
           </div>
           <div className="text-center">
             <h3 className="font-bold text-center text-2xl mb-4">

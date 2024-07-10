@@ -1,20 +1,26 @@
-interface Props {
-  btnText: string
-}
-
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
+import {
+  useState,
+  ChangeEvent,
+  FormEvent,
+  Dispatch,
+  SetStateAction
+} from 'react'
 
 import { ITask } from '../../interfaces/Task'
 
-export const TaskForm = ({ btnText }: Props) => {
+interface Props {
+  btnText: string
+  taskList: ITask[]
+  setTaskList?: Dispatch<SetStateAction<ITask[]>>
+}
+
+export const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
   const [id, setId] = useState<number>(0)
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
 
   const addTaskHandler = (e: FormEvent) => {
     e.preventDefault()
-    console.log('Title', title)
-    console.log('Desc', description)
     if (title.trim() === '') {
       alert('Por favor, preencha o título!')
       return
@@ -23,15 +29,18 @@ export const TaskForm = ({ btnText }: Props) => {
       alert('Por favor, preencha a descrição!')
       return
     }
+    setId(id + 1)
+    const newTask: ITask = { id, title, description }
+    setTaskList!([...taskList, newTask])
+    setTitle('')
+    setDescription('')
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === 'title') {
       setTitle(e.target.value)
-      console.log(title)
     } else {
       setDescription(e.target.value)
-      console.log(description)
     }
   }
 
@@ -47,6 +56,7 @@ export const TaskForm = ({ btnText }: Props) => {
         placeholder="Digite o título da tarefa"
         className="p-3 border border-slate-700 rounded outline-none text-base"
         onChange={handleChange}
+        value={title}
       />
       <label htmlFor="desc" className="text-lg">
         Descrição:
@@ -58,6 +68,7 @@ export const TaskForm = ({ btnText }: Props) => {
         placeholder="Digite a descrição da tarefa"
         className="p-3 border border-slate-700 rounded outline-none text-base"
         onChange={handleChange}
+        value={description}
       />
       <input
         type="submit"
