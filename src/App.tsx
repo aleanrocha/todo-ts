@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { TaskForm } from './components/TaskForm'
+import { TaskList } from './components/TaskList'
 import { ITask } from './interfaces/Task'
 
 export const App = () => {
@@ -27,7 +28,7 @@ export const App = () => {
             <h3 className="font-bold text-center text-2xl mb-4">
               Suas tarefas:
             </h3>
-            <p>Minhas tarefas...</p>
+            <TaskList taskList={taskList} />
           </div>
         </section>
       </main>
