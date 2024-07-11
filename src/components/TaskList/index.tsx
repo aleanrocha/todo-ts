@@ -5,9 +5,10 @@ import { ITask } from '../../interfaces/Task'
 
 interface Props {
   taskList: ITask[]
+  handleDelete(id: number): void
 }
 
-export const TaskList = ({ taskList }: Props) => {
+export const TaskList = ({ taskList, handleDelete }: Props) => {
   return (
     <>
       {taskList.length > 0 ? (
@@ -25,7 +26,12 @@ export const TaskList = ({ taskList }: Props) => {
             </div>
             <div className="flex flex-col gap-2 items-center">
               <MdModeEditOutline className="bg-primary-color text-todo-white text-2xl px-1 rounded hover:text-secondary-color transition cursor-pointer" />
-              <FaRegTrashAlt className="bg-primary-color text-todo-white text-2xl px-1 rounded hover:text-secondary-color transition cursor-pointer" />
+              <FaRegTrashAlt
+                onClick={() => {
+                  handleDelete(task.id)
+                }}
+                className="bg-primary-color text-todo-white text-2xl px-1 rounded hover:text-secondary-color transition cursor-pointer"
+              />
             </div>
           </div>
         ))

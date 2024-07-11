@@ -8,7 +8,9 @@ import { ITask } from './interfaces/Task'
 
 export const App = () => {
   const [taskList, setTaskList] = useState<ITask[]>([])
-  console.log(taskList)
+  const deleteTask = (id: number) =>
+    setTaskList(taskList.filter((task) => task.id !== id))
+
   return (
     <>
       <Header />
@@ -28,7 +30,7 @@ export const App = () => {
             <h3 className="font-bold text-center text-2xl mb-4">
               Suas tarefas:
             </h3>
-            <TaskList taskList={taskList} />
+            <TaskList taskList={taskList} handleDelete={deleteTask} />
           </div>
         </section>
       </main>
