@@ -3,7 +3,8 @@ import {
   ChangeEvent,
   FormEvent,
   Dispatch,
-  SetStateAction
+  SetStateAction,
+  useEffect
 } from 'react'
 
 import { ITask } from '../../interfaces/Task'
@@ -12,12 +13,21 @@ interface Props {
   btnText: string
   taskList: ITask[]
   setTaskList?: Dispatch<SetStateAction<ITask[]>>
+  task?: ITask | null
 }
 
-export const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
+export const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
   const [id, setId] = useState<number>(0)
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
+
+  useEffect(() => {
+    if (task) {
+      setId(task.id)
+      setTitle(task.title)
+      setDescription(task.description)
+    }
+  }, [task])
 
   const addTaskHandler = (e: FormEvent) => {
     e.preventDefault()

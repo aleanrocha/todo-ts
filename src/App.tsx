@@ -9,6 +9,7 @@ import { ITask } from './interfaces/Task'
 
 export const App = () => {
   const [taskList, setTaskList] = useState<ITask[]>([])
+  const [taskToUpdate, setTaskTopUpdate] = useState<ITask | null>(null)
   const deleteTask = (id: number) =>
     setTaskList(taskList.filter((task) => task.id !== id))
   const showOrCloseModal = (display: boolean) => {
@@ -19,8 +20,9 @@ export const App = () => {
       modal!.classList.add('hidden')
     }
   }
-  const editTask = (): void => {
+  const editTask = (task: ITask): void => {
     showOrCloseModal(true)
+    setTaskTopUpdate(task)
   }
 
   return (
@@ -49,7 +51,15 @@ export const App = () => {
             />
           </div>
         </section>
-        <Modal children={<TaskForm taskList={taskList} btnText="Salvar" />} />
+        <Modal
+          children={
+            <TaskForm
+              taskList={taskList}
+              task={taskToUpdate}
+              btnText="Salvar"
+            />
+          }
+        />
       </main>
       <Footer />
     </>

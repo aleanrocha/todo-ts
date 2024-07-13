@@ -6,7 +6,7 @@ import { ITask } from '../../interfaces/Task'
 interface Props {
   taskList: ITask[]
   handleDelete(id: number): void
-  handleEdit(): void
+  handleEdit(task: ITask): void
 }
 
 export const TaskList = ({ taskList, handleDelete, handleEdit }: Props) => {
@@ -27,7 +27,7 @@ export const TaskList = ({ taskList, handleDelete, handleEdit }: Props) => {
             </div>
             <div className="flex flex-col gap-2 items-center">
               <MdModeEditOutline
-                onClick={() => handleEdit()}
+                onClick={() => handleEdit(task)}
                 className="bg-primary-color text-todo-white text-2xl px-1 rounded hover:text-secondary-color transition cursor-pointer"
               />
               <FaRegTrashAlt
