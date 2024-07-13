@@ -25,6 +25,15 @@ export const App = () => {
     setTaskTopUpdate(task)
   }
 
+  const updateTask = (id: number, title: string, description: string) => {
+    const updatedTask: ITask = { id, title, description }
+    const updatedItems = taskList.map((task) =>
+      task.id === updatedTask.id ? updatedTask : task
+    )
+    setTaskList(updatedItems)
+    showOrCloseModal(false)
+  }
+
   return (
     <>
       <Header />
@@ -57,6 +66,7 @@ export const App = () => {
               taskList={taskList}
               task={taskToUpdate}
               btnText="Salvar"
+              handleUpdate={updateTask}
             />
           }
         />

@@ -14,9 +14,16 @@ interface Props {
   taskList: ITask[]
   setTaskList?: Dispatch<SetStateAction<ITask[]>>
   task?: ITask | null
+  handleUpdate?(id: number, title: string, description: string): void
 }
 
-export const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
+export const TaskForm = ({
+  btnText,
+  taskList,
+  setTaskList,
+  task,
+  handleUpdate
+}: Props) => {
   const [id, setId] = useState<number>(0)
   const [title, setTitle] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -39,11 +46,15 @@ export const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
       alert('Por favor, preencha a descrição!')
       return
     }
-    setId(id + 1)
-    const newTask: ITask = { id, title, description }
-    setTaskList!([...taskList, newTask])
-    setTitle('')
-    setDescription('')
+    if (handleUpdate) {
+      handleUpdate(id, title, description)
+    } else {
+      setId(id + 1)
+      const newTask: ITask = { id, title, description }
+      setTaskList!([...taskList, newTask])
+      setTitle('')
+      setDescription('')
+    }
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
