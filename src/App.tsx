@@ -11,6 +11,17 @@ export const App = () => {
   const [taskList, setTaskList] = useState<ITask[]>([])
   const deleteTask = (id: number) =>
     setTaskList(taskList.filter((task) => task.id !== id))
+  const showOrCloseModal = (display: boolean) => {
+    const modal = document.getElementById('modal')
+    if (display) {
+      modal!.classList.remove('hidden')
+    } else {
+      modal!.classList.add('hidden')
+    }
+  }
+  const editTask = (): void => {
+    showOrCloseModal(true)
+  }
 
   return (
     <>
@@ -31,7 +42,11 @@ export const App = () => {
             <h3 className="font-bold text-center text-2xl mb-4">
               Suas tarefas:
             </h3>
-            <TaskList taskList={taskList} handleDelete={deleteTask} />
+            <TaskList
+              taskList={taskList}
+              handleDelete={deleteTask}
+              handleEdit={editTask}
+            />
           </div>
         </section>
         <Modal children={<TaskForm taskList={taskList} btnText="Salvar" />} />
