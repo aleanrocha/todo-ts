@@ -34,7 +34,7 @@ export const App = () => {
             <TaskList taskList={taskList} handleDelete={deleteTask} />
           </div>
         </section>
-        <Modal />
+        <Modal children={<TaskForm taskList={taskList} btnText="Salvar" />} />
       </main>
       <Footer />
     </>
