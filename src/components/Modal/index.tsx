@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const Modal = ({ children }: Props) => {
-  const closeModal = (e: MouseEvent) => {
+  const closeModal = (/*e: MouseEvent*/) => {
     const modal = document.getElementById('modal')
     modal!.classList.add('hidden')
   }
