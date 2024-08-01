@@ -1,11 +1,11 @@
-import { ReactNode, MouseEvent } from 'react'
+import { ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
 }
 
 export const Modal = ({ children }: Props) => {
-  const closeModal = (/*e: MouseEvent*/) => {
+  const closeModal = () => {
     const modal = document.getElementById('modal')
     modal!.classList.add('hidden')
   }
